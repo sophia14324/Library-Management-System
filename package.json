@@ -1,0 +1,17 @@
+{
+  "name": "library-management-system",
+  "version": "1.0.0",
+  "description": "A web application to help organize a personal collection of books",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
+ 
