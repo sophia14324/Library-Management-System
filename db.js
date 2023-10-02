@@ -7,10 +7,11 @@ const pool = mysql.createPool({
     host: process.env.DB_CONN_HOST,
     user: process.env.DB_CONN_USER,
     password: process.env.DB_CONN_PW,
+    database: process.env.DB_CONN_DBNAME,
     multipleStatements: true
 
 });
-//check for connection errors
+// check for connection errors
 pool.getConnection((err, connection) => {
     if (err) {
         if (err.code === 'PROTOCOL_CONNECTION_LOST') {
