@@ -18,7 +18,7 @@ app.engine('hbs', hbs.engine({
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
-    res.render('Testing testing...');
+    res.render('helloworld');
 });
 app.use((req, res, next) => {
     const err = new Error('Page not found');
