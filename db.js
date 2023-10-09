@@ -1,34 +1,57 @@
-const mysql = require('mysql');
-const util = require('util');
-require('dotenv').config();
+const express = require('express');
+const bodyParser = require('body-parser');
+const hbs = require('express-handlebars');
+const expressSanitizer = require('express-sanitizer');
+const hbsHelpers = require('./views/helpers');
+const app = express();
 
-const pool = mysql.createPool({
-    connectionLimit: 1000,
-    host: process.env.DB_CONN_HOST,
-    user: process.env.DB_CONN_USER,
-    password: process.env.DB_CONN_PW,
-    // database: process.env.DB_CONN_DBNAME,
-    multipleStatements: true
+const PORT = process.env.PORT || 5000;
 
-});
-// check for connection errors
-pool.getConnection((err, connection) => {
-    if (err) {
-        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            console.error('Database Error: Connection was closed.');
+app.use(bodyParser.urlencoded({ extended: false }));
 
-        } else if (err.code === 'ER_CONN_COUNT_ERROR') {
-            console.error('Database Error: Database has too many connections.');
-            
-        } else if (err.code === 'ECONNREFUSED') {
-            console.error('Database Error: Connection was refused.');
-            
-        }
+app.use(expressSanitizer());
+
+// setup express routes
+const mainRoutes = require('./routes');
+const booksRoutes = require('./routes/books');
+const musicRoutes = require('./routes/music');
+const moviesRoutes = require('./routes/movies');
+const comicsRoutes = require('./routes/comics');
+
+app.use(mainRoutes);
+app.use('/books', booksRoutes);
+app.use('/music', musicRoutes);
+app.use('/movies', moviesRoutes);
+app.use('/comics', comicsRoutes);
+
+app.use('/static', express.static('public'));
+
+// setup handlebars template engine
+app.engine('hbs', hbs({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: './views/layouts/',
+    partialsDir: './views/includes/',
+    helpers: {
+        if_equal: hbsHelpers.isEqualHelper
     }
-    if (connection) connection.release();
-    return;
-});
-// so we can use async/await when running db queries
-pool.query = util.promisify(pool.query);
+}));
 
-module.exports = pool;
+app.set('view engine', 'hbs');
+
+// 404 route
+app.use((req, res, next) => {
+    const err = new Error(`The requested URL ${req.originalUrl} was not found on this server.  That's all we know.`);
+    err.status = 404;
+    next(err);
+});
+
+// error handler
+app.use((err, req, res, next) => {
+    err.status = err.status || 500;
+    res.status(err.status).render('error', { err });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
+});
