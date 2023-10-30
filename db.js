@@ -37,7 +37,7 @@ app.engine('hbs', hbs({
     }
 }));
 
-app.set('view engine', 'hbs');
+app.set('view engine', 'hbs')
 
 // 404 route
 app.use((req, res, next) => {
