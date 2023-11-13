@@ -28,4 +28,4 @@ const self = module.exports = {
             if (callback) callback();
         }, 4000);
     }
-};
+}
