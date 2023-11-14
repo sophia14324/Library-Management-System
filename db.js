@@ -5,7 +5,7 @@ const expressSanitizer = require('express-sanitizer');
 const hbsHelpers = require('./views/helpers');
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -24,7 +24,7 @@ app.use('/music', musicRoutes);
 app.use('/movies', moviesRoutes);
 app.use('/comics', comicsRoutes);
 
-app.use('/static', express.static('public'));
+app.use('/static', express.static('public'))
 
 // setup handlebars template engine
 app.engine('hbs', hbs({
