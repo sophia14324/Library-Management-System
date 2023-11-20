@@ -7,7 +7,7 @@ const self = module.exports = {
     bookSearch: $('#book-search'),
     defaultBookImage: '/static/img/don_quixote.jpg',
     showLoader: () => {
-        document.getElementById('loadingSpinner').classList.toggle('show');
+        document.getElementById('loadingSpinner').classList.toggle('show')
     },
     showAlert: (type, msg, callback) => {
         const alertStr = 
@@ -16,7 +16,7 @@ const self = module.exports = {
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>`;
+            </div>`
 
         $('body').prepend(alertStr);
         self.removeAlert(callback);
@@ -28,4 +28,4 @@ const self = module.exports = {
             if (callback) callback();
         }, 4000);
     }
-};
+}
