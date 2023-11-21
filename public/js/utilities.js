@@ -18,14 +18,14 @@ const self = module.exports = {
                 </button>
             </div>`
 
-        $('body').prepend(alertStr);
-        self.removeAlert(callback);
+        $('body').prepend(alertStr)
+        self.removeAlert(callback)
     },
     removeAlert: callback => {
         clearTimeout(self.alertTimeout);
         self.alertTimeout = setTimeout(() => {
-            $('.alert').alert('close');
-            if (callback) callback();
-        }, 4000);
+            $('.alert').alert('close')
+            if (callback) callback()
+        }, 4000)
     }
 }
