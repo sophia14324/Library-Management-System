@@ -27,15 +27,15 @@ const removeBook = async elem => {
 
     try {
         const result = await fetch(`/books/deletebook/${id}`, { method: 'DELETE' });
-        const jsonResponse = await result.json();
+        const jsonResponse = await result.json()
         
-        Utilities.removeBookModal.modal('hide');
+        Utilities.removeBookModal.modal('hide')
         Utilities.showAlert('danger', jsonResponse.msg, () => {
-            window.location.reload(true);
+            window.location.reload(true)
         });
     } catch (err) {
-        console.error('Fetch error: ', err);
-        Utilities.showAlert('danger', err.msg);
+        console.error('Fetch error: ', err)
+        Utilities.showAlert('danger', err.msg)
     }
 };
 
