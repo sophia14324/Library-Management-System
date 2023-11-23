@@ -10,7 +10,7 @@ window.onload = () => {
 
 // Start: sticky search box functionality
 $(document).scroll(() => {
-    let scrollTop = $(document).scrollTop();
+    let scrollTop = $(document).scrollTop()
 
     if (scrollTop > 175) {
         Utilities.searchBooksForm.addClass('sticky');
@@ -19,14 +19,14 @@ $(document).scroll(() => {
     }
 });
 
-$(document).trigger('scroll');
+$(document).trigger('scroll')
 // End: sticky search box functionality
 
 const removeBook = async elem => {
-    const id = elem.getAttribute('data-bookid');
+    const id = elem.getAttribute('data-bookid')
 
     try {
-        const result = await fetch(`/books/deletebook/${id}`, { method: 'DELETE' });
+        const result = await fetch(`/books/deletebook/${id}`, { method: 'DELETE' })
         const jsonResponse = await result.json()
         
         Utilities.removeBookModal.modal('hide')
