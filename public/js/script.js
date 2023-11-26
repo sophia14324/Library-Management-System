@@ -1,11 +1,11 @@
 require('../css/styles.css');
 const $ = require('jquery');
 import 'bootstrap/dist/js/bootstrap.bundle';
-const Utilities = require('./utilities');
+const Utilities = require('./utilities')
 
 // Remove any visible alerts on page load
 window.onload = () => {
-    Utilities.removeAlert();
+    Utilities.removeAlert()
 };
 
 // Start: sticky search box functionality
@@ -13,9 +13,9 @@ $(document).scroll(() => {
     let scrollTop = $(document).scrollTop()
 
     if (scrollTop > 175) {
-        Utilities.searchBooksForm.addClass('sticky');
+        Utilities.searchBooksForm.addClass('sticky')
     } else {
-        Utilities.searchBooksForm.removeClass('sticky');
+        Utilities.searchBooksForm.removeClass('sticky')
     }
 });
 
@@ -40,7 +40,7 @@ const removeBook = async elem => {
 };
 
 const getBookInfo = async elem => {
-    Utilities.showLoader();
+    Utilities.showLoader()
     try {
         const bookResponse = await fetch(`/books/getbookinfo?bookquery=${elem.getAttribute('data-query')}`);
         const bookData = await bookResponse.json();
